@@ -22,5 +22,10 @@
     "require-dev": {
         "phpunit/phpunit": "^10.1@dev",
         "squizlabs/php_codesniffer": "4.0.x-dev"
+    },
+    "scripts": {
+        "phpcbf": "phpcbf --standard=psr12 --severity=4 --tab-width=4 src tests",
+        "phpcs": "phpcs --standard=psr12 --severity=4 --tab-width=4 src",
+        "test": "phpunit"
     }
 }
