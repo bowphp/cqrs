@@ -4,7 +4,17 @@ CQRS (Command Query Responsibility Segregation). It's a pattern that I first hea
 
 [For more information](https://www.martinfowler.com/bliki/CQRS.html)
 
-Create the example command:
+## Install
+
+The package uses php >= 8.1
+
+```bash
+composer require bowphp/cqrs
+```
+
+## Help
+
+First, create the example command:
 
 ```php
 use Bow\CQRS\Command\CommandInterface;
@@ -15,7 +25,7 @@ class CreateUserCommand implements CommandInterface
 }
 ```
 
-Create the handler here:
+Second, create the handler here:
 
 ```php
 use Bow\CQRS\Command\CommandHandlerInterface;
@@ -51,7 +61,7 @@ public function run()
 }
 ```
 
-Execute the command in controller:
+Execute the command in the controller:
 
 ```php
 namespace App\Controllers;
@@ -79,3 +89,16 @@ Put a new route:
 ```php
 $app->post("/users/create", UserController::class);
 ```
+
+## Contributing
+
+Thank you for considering contributing to Bow Framework! The contribution guide is in the framework documentation.
+
+- [Franck DAKIA](https://github.com/papac)
+- [Thank's collaborators](https://github.com/bowphp/framework/graphs/contributors)
+
+## Contact
+
+[papac@bowphp.com](mailto:papac@bowphp.com) - [@papacdev](https://twitter.com/papacdev)
+
+**Please, if there is a bug in the project. Contact me by email or leave me a message on [slack](https://bowphp.slack.com). or [join us on slask](https://join.slack.com/t/bowphp/shared_invite/enQtNzMxOTQ0MTM2ODM5LTQ3MWQ3Mzc1NDFiNDYxMTAyNzBkNDJlMTgwNDJjM2QyMzA2YTk4NDYyN2NiMzM0YTZmNjU1YjBhNmJjZThiM2Q)**
