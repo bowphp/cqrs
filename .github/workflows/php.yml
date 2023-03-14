@@ -24,7 +24,7 @@ jobs:
       run: composer install --prefer-dist --no-progress
 
     - name: Check code standard
-      run: ./vendor/bin/phpcs --standard=psr12 --severity=4 --tab-width=4 src --ignore="tests"
+      run: composer run-script phpcs
 
     - name: Run test suite
       run: composer run-script test
