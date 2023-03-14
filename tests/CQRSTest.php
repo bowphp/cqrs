@@ -2,21 +2,24 @@
 
 namespace Bow\Tests\CQRS;
 
-use FetchPetQueryHandler;
-use PHPUnit\Framework\TestCase;
 use Bow\CQRS\CQRSException;
 use Bow\CQRS\Query\QueryBus;
+use PHPUnit\Framework\TestCase;
 use Bow\CQRS\Command\CommandBus;
 use Bow\Tests\CQRS\Queries\FetchPetQuery;
 use Bow\Tests\CQRS\Queries\FetchAllPetQuery;
 use Bow\Tests\CQRS\Commands\CreatePetCommand;
 use Bow\CQRS\Registration as CQRSRegistration;
+use Bow\Tests\CQRS\Queries\FetchPetQueryHandler;
 use Bow\Tests\CQRS\Commands\CreatePetCommandHandler;
+use Bow\Tests\CQRS\Fixtures\PetFinder;
 
 class CQRSTest extends TestCase
 {
     public static function setUpBeforeClass(): void
     {
+        PetFinder::clear();
+
         CQRSRegistration::commands([
             CreatePetCommand::class => CreatePetCommandHandler::class
         ]);
@@ -29,7 +32,7 @@ class CQRSTest extends TestCase
     public function test_get_handler_should_return_the_right_handler()
     {
         $query_handler = CQRSRegistration::getHandler(new FetchPetQuery(1));
-        $command_handler = CQRSRegistration::getHandler(new CreatePetCommand("Name"));
+        $command_handler = CQRSRegistration::getHandler(new CreatePetCommand("Blaze", "Newt"));
 
         $this->assertInstanceOf(FetchPetQueryHandler::class, $query_handler);
         $this->assertInstanceOf(CreatePetCommandHandler::class, $command_handler);
@@ -39,13 +42,13 @@ class CQRSTest extends TestCase
     {
         $this->expectException(CQRSException::class);
 
-        $query_handler = CQRSRegistration::getHandler(new FetchAllPetQuery());
+        CQRSRegistration::getHandler(new FetchAllPetQuery());
     }
 
     public function test_command_bus()
     {
         $command_bus = new CommandBus();
-        $id = $command_bus->execute(new CreatePetCommand("Pascal"));
+        $id = $command_bus->execute(new CreatePetCommand("Pascal", "Franck"));
 
         $this->assertEquals($id, 1);
     }

@@ -5,7 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Bow\\CQRS\\": "src/"
+            "Bow\\CQRS\\": "src/",
+            "Bow\\Tests\\CQRS\\": "tests/"
         }
     },
     "authors": [
