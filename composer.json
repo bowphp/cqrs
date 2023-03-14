@@ -5,7 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Bow\\CQRS\\": "src/"
+            "Bow\\CQRS\\": "src/",
+            "Bow\\Tests\\CQRS\\": "tests/"
         }
     },
     "authors": [
@@ -26,6 +27,6 @@
     "scripts": {
         "phpcbf": "phpcbf --standard=psr12 --severity=4 --tab-width=4 src tests",
         "phpcs": "phpcs --standard=psr12 --severity=4 --tab-width=4 src",
-        "test": "phpunit"
+        "test": "phpunit tests --bootstrap=vendor/autoload.php"
     }
 }

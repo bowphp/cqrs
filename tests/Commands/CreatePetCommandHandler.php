@@ -2,19 +2,19 @@
 
 namespace Bow\Tests\CQRS\Commands;
 
-use Bow\Tests\Database\Stubs\PetModelStub;
+use Bow\Tests\CQRS\Fixtures\PetFinder;
 use Bow\CQRS\Command\CommandInterface;
 use Bow\CQRS\Command\CommandHandlerInterface;
-use Bow\Tests\CQRS\Commands\CreatePetCommand;
 
 class CreatePetCommandHandler implements CommandHandlerInterface
 {
-    public function process(CommandInterface $command): mixed
+    public function process(CommandInterface $command): int
     {
-        $pet = PetModelStub::create([
+        $petId = PetFinder::create([
             "name" => $command->name,
+            "author" => $command->author
         ]);
 
-        return $pet->id;
+        return $petId;
     }
 }

@@ -6,12 +6,16 @@ use Bow\Tests\CQRS\Fixtures\PetFinder;
 use Bow\CQRS\Query\QueryInterface;
 use Bow\CQRS\Query\QueryHandlerInterface;
 
-class FetchPetQueryHandler implements QueryHandlerInterface
+class FetchAllPetQueryHandler implements QueryHandlerInterface
 {
     public function process(QueryInterface $query): mixed
     {
-        $pet = PetFinder::find($query->id);
+        $pets = PetFinder::all();
 
-        return $pet;
+        foreach ($pets as $key => $pet) {
+            $pets[$key] = (object) $pet;
+        }
+
+        return $pets;
     }
 }
