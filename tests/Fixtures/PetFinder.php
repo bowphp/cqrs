@@ -16,7 +16,7 @@ class PetFinder
     {
         $pets = static::all();
 
-        foreach($pets as $key => $pet) {
+        foreach ($pets as $key => $pet) {
             if ($key + 1 === $id) {
                 return (object) $pet;
             }

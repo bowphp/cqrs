@@ -12,7 +12,7 @@ class FetchAllPetQueryHandler implements QueryHandlerInterface
     {
         $pets = PetFinder::all();
 
-        foreach($pets as $key => $pet) {
+        foreach ($pets as $key => $pet) {
             $pets[$key] = (object) $pet;
         }
 
