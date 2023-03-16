@@ -55,14 +55,14 @@ final class Registration
      * @return QueryHandlerInterface|CommandHandlerInterface
      */
     public static function getHandler(
-        QueryInterface|CommandInterface $cq
+        QueryInterface|CommandInterface $action
     ): QueryHandlerInterface|CommandHandlerInterface {
-        $cq_class = get_class($cq);
+        $action_class = get_class($action);
 
-        if ($cq instanceof QueryInterface) {
-            $handler = static::$queries[$cq_class] ?? null;
+        if ($action instanceof QueryInterface) {
+            $handler = static::$queries[$action_class] ?? null;
         } else {
-            $handler = static::$commands[$cq_class] ?? null;
+            $handler = static::$commands[$action_class] ?? null;
         }
 
         if (!is_null($handler)) {
@@ -72,8 +72,8 @@ final class Registration
         throw new CQRSException(
             sprintf(
                 "The %s %s:class handler is not found on the CQ register",
-                $cq instanceof QueryInterface ? 'query' : 'command',
-                $cq_class
+                $action instanceof QueryInterface ? 'query' : 'command',
+                $action_class
             )
         );
     }
