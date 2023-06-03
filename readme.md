@@ -101,12 +101,6 @@ Put a new route:
 $app->post("/users/create", UserController::class);
 ```
 
-Put a new route:
-
-```php
-$app->post("/users/create", UserController::class);
-```
-
 ## Contributing
 
 Thank you for considering contributing to Bow Framework! The contribution guide is in the framework documentation.
