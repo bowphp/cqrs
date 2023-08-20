@@ -1,5 +1,7 @@
 <?php
 
+namespace Bow\CQRS\Command;
+
 use Bow\CQRS\Command\CommandInterface;
 use Bow\CQRS\Command\CommandHandlerInterface;
 use Bow\Database\Database;
