@@ -12,7 +12,7 @@ abstract class CommandHandlerTransactionService implements CommandHandlerInterfa
     * @return mixed
     */
     abstract protected function run(CommandInterface $command): mixed;
-    
+
     /**
      * @inheritDoc
      */
