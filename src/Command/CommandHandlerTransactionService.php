@@ -5,7 +5,7 @@ namespace Bow\CQRS\Command;
 use Bow\CQRS\Command\CommandInterface;
 use Bow\CQRS\Command\CommandHandlerInterface;
 use Bow\Database\Database;
-use Bow\Database\Exception\DatabaseException;
+use Exception;
 
 abstract class CommandHandlerTransactionService implements CommandHandlerInterface
 {
@@ -28,7 +28,7 @@ abstract class CommandHandlerTransactionService implements CommandHandlerInterfa
             Database::commit();
 
             return $result;
-        } catch (DatabaseException $e) {
+        } catch (Exception $e) {
             Database::rollback();
             throw $e;
         }
