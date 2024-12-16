@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bowphp/framework",
-            "version": "5.1.2",
+            "version": "5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bowphp/framework.git",
-                "reference": "1a97aa322057b36fef139f6da1ecb20a35693950"
+                "reference": "0d232adfb19b9cee9ad5e80ceafc470c4dcd15cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bowphp/framework/zipball/1a97aa322057b36fef139f6da1ecb20a35693950",
-                "reference": "1a97aa322057b36fef139f6da1ecb20a35693950",
+                "url": "https://api.github.com/repos/bowphp/framework/zipball/0d232adfb19b9cee9ad5e80ceafc470c4dcd15cb",
+                "reference": "0d232adfb19b9cee9ad5e80ceafc470c4dcd15cb",
                 "shasum": ""
             },
             "require": {
@@ -27,7 +27,8 @@
                 "neitanod/forceutf8": "^2.0",
                 "nesbot/carbon": "^2.16",
                 "php": "^8.1",
-                "psy/psysh": "v0.10.*"
+                "psy/psysh": "v0.10.*",
+                "ramsey/uuid": "^4.7"
             },
             "require-dev": {
                 "aws/aws-sdk-php": "^3.87",
@@ -37,11 +38,11 @@
                 "pda/pheanstalk": "^4.0",
                 "php-amqplib/php-amqplib": "^3.0",
                 "phpstan/phpstan": "^0.12.87",
-                "phpunit/phpunit": "^8",
+                "phpunit/phpunit": "^9",
                 "predis/predis": "^2.1",
                 "spatie/phpunit-snapshot-assertions": "^4.2",
                 "squizlabs/php_codesniffer": "3.*",
-                "twig/twig": "^2.5"
+                "twig/twig": "^3"
             },
             "suggest": {
                 "papac/bow-blade": "For using Blade template engine",
@@ -90,20 +91,20 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-09-17T13:36:29+00:00"
+            "time": "2024-12-14T04:10:50+00:00"
         },
         {
             "name": "bowphp/tintin",
-            "version": "3.1.2",
+            "version": "3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bowphp/tintin.git",
-                "reference": "d183a5cf0e5ee648407e20844b58434e379f1c42"
+                "reference": "a39c4a69f0acff004137fa86765e8065fe360821"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bowphp/tintin/zipball/d183a5cf0e5ee648407e20844b58434e379f1c42",
-                "reference": "d183a5cf0e5ee648407e20844b58434e379f1c42",
+                "url": "https://api.github.com/repos/bowphp/tintin/zipball/a39c4a69f0acff004137fa86765e8065fe360821",
+                "reference": "a39c4a69f0acff004137fa86765e8065fe360821",
                 "shasum": ""
             },
             "require": {
@@ -118,12 +119,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "Tintin\\Laravel\\TintinServiceProvider"
-                    ],
                     "aliases": {
                         "Tintin": "Tintin\\Laravel\\Facade\\Tintin"
-                    }
+                    },
+                    "providers": [
+                        "Tintin\\Laravel\\TintinServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -154,7 +155,7 @@
             ],
             "support": {
                 "issues": "https://github.com/bowphp/tintin/issues",
-                "source": "https://github.com/bowphp/tintin/tree/3.1.2"
+                "source": "https://github.com/bowphp/tintin/tree/3.1.3"
             },
             "funding": [
                 {
@@ -170,7 +171,67 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-05-11T11:12:51+00:00"
+            "time": "2024-12-16T13:19:29+00:00"
+        },
+        {
+            "name": "brick/math",
+            "version": "0.12.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/brick/math.git",
+                "reference": "f510c0a40911935b77b86859eb5223d58d660df1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/brick/math/zipball/f510c0a40911935b77b86859eb5223d58d660df1",
+                "reference": "f510c0a40911935b77b86859eb5223d58d660df1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.2",
+                "phpunit/phpunit": "^10.1",
+                "vimeo/psalm": "5.16.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Brick\\Math\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Arbitrary-precision arithmetic library",
+            "keywords": [
+                "Arbitrary-precision",
+                "BigInteger",
+                "BigRational",
+                "arithmetic",
+                "bigdecimal",
+                "bignum",
+                "bignumber",
+                "brick",
+                "decimal",
+                "integer",
+                "math",
+                "mathematics",
+                "rational"
+            ],
+            "support": {
+                "issues": "https://github.com/brick/math/issues",
+                "source": "https://github.com/brick/math/tree/0.12.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/BenMorel",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-11-29T23:19:16+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -801,6 +862,187 @@
             "time": "2021-11-30T14:05:36+00:00"
         },
         {
+            "name": "ramsey/collection",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/collection.git",
+                "reference": "a4b48764bfbb8f3a6a4d1aeb1a35bb5e9ecac4a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ramsey/collection/zipball/a4b48764bfbb8f3a6a4d1aeb1a35bb5e9ecac4a5",
+                "reference": "a4b48764bfbb8f3a6a4d1aeb1a35bb5e9ecac4a5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "captainhook/plugin-composer": "^5.3",
+                "ergebnis/composer-normalize": "^2.28.3",
+                "fakerphp/faker": "^1.21",
+                "hamcrest/hamcrest-php": "^2.0",
+                "jangregor/phpstan-prophecy": "^1.0",
+                "mockery/mockery": "^1.5",
+                "php-parallel-lint/php-console-highlighter": "^1.0",
+                "php-parallel-lint/php-parallel-lint": "^1.3",
+                "phpcsstandards/phpcsutils": "^1.0.0-rc1",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.9",
+                "phpstan/phpstan-mockery": "^1.1",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^9.5",
+                "psalm/plugin-mockery": "^1.1",
+                "psalm/plugin-phpunit": "^0.18.4",
+                "ramsey/coding-standard": "^2.0.3",
+                "ramsey/conventional-commits": "^1.3",
+                "vimeo/psalm": "^5.4"
+            },
+            "type": "library",
+            "extra": {
+                "captainhook": {
+                    "force-install": true
+                },
+                "ramsey/conventional-commits": {
+                    "configFile": "conventional-commits.json"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ramsey\\Collection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                }
+            ],
+            "description": "A PHP library for representing and manipulating collections.",
+            "keywords": [
+                "array",
+                "collection",
+                "hash",
+                "map",
+                "queue",
+                "set"
+            ],
+            "support": {
+                "issues": "https://github.com/ramsey/collection/issues",
+                "source": "https://github.com/ramsey/collection/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ramsey",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/ramsey/collection",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-12-31T21:50:55+00:00"
+        },
+        {
+            "name": "ramsey/uuid",
+            "version": "4.7.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/uuid.git",
+                "reference": "91039bc1faa45ba123c4328958e620d382ec7088"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/91039bc1faa45ba123c4328958e620d382ec7088",
+                "reference": "91039bc1faa45ba123c4328958e620d382ec7088",
+                "shasum": ""
+            },
+            "require": {
+                "brick/math": "^0.8.8 || ^0.9 || ^0.10 || ^0.11 || ^0.12",
+                "ext-json": "*",
+                "php": "^8.0",
+                "ramsey/collection": "^1.2 || ^2.0"
+            },
+            "replace": {
+                "rhumsaa/uuid": "self.version"
+            },
+            "require-dev": {
+                "captainhook/captainhook": "^5.10",
+                "captainhook/plugin-composer": "^5.3",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+                "doctrine/annotations": "^1.8",
+                "ergebnis/composer-normalize": "^2.15",
+                "mockery/mockery": "^1.3",
+                "paragonie/random-lib": "^2",
+                "php-mock/php-mock": "^2.2",
+                "php-mock/php-mock-mockery": "^1.3",
+                "php-parallel-lint/php-parallel-lint": "^1.1",
+                "phpbench/phpbench": "^1.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan": "^1.8",
+                "phpstan/phpstan-mockery": "^1.1",
+                "phpstan/phpstan-phpunit": "^1.1",
+                "phpunit/phpunit": "^8.5 || ^9",
+                "ramsey/composer-repl": "^1.4",
+                "slevomat/coding-standard": "^8.4",
+                "squizlabs/php_codesniffer": "^3.5",
+                "vimeo/psalm": "^4.9"
+            },
+            "suggest": {
+                "ext-bcmath": "Enables faster math with arbitrary-precision integers using BCMath.",
+                "ext-gmp": "Enables faster math with arbitrary-precision integers using GMP.",
+                "ext-uuid": "Enables the use of PeclUuidTimeGenerator and PeclUuidRandomGenerator.",
+                "paragonie/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
+                "ramsey/uuid-doctrine": "Allows the use of Ramsey\\Uuid\\Uuid as Doctrine field type."
+            },
+            "type": "library",
+            "extra": {
+                "captainhook": {
+                    "force-install": true
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Ramsey\\Uuid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A PHP library for generating and working with universally unique identifiers (UUIDs).",
+            "keywords": [
+                "guid",
+                "identifier",
+                "uuid"
+            ],
+            "support": {
+                "issues": "https://github.com/ramsey/uuid/issues",
+                "source": "https://github.com/ramsey/uuid/tree/4.7.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ramsey",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/ramsey/uuid",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-04-27T21:32:50+00:00"
+        },
+        {
             "name": "symfony/console",
             "version": "v5.3.16",
             "source": {
@@ -991,8 +1233,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1067,8 +1309,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1145,8 +1387,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1229,8 +1471,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1303,8 +1545,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1379,8 +1621,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -2379,12 +2621,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f72cf7100352e24255433a04ac6ef862df56e56c"
+                "reference": "54ae58f62c551a1c73498b053bd11697aac16abe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f72cf7100352e24255433a04ac6ef862df56e56c",
-                "reference": "f72cf7100352e24255433a04ac6ef862df56e56c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/54ae58f62c551a1c73498b053bd11697aac16abe",
+                "reference": "54ae58f62c551a1c73498b053bd11697aac16abe",
                 "shasum": ""
             },
             "require": {
@@ -2472,7 +2714,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-06T14:21:54+00:00"
+            "time": "2024-12-12T06:30:58+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -3396,12 +3638,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "92e5a9a6aebcd07bc54aef63403b3cc1cd8fe54e"
+                "reference": "ceeba630bb1c0ea9b43140081c06befc43351e77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/92e5a9a6aebcd07bc54aef63403b3cc1cd8fe54e",
-                "reference": "92e5a9a6aebcd07bc54aef63403b3cc1cd8fe54e",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/ceeba630bb1c0ea9b43140081c06befc43351e77",
+                "reference": "ceeba630bb1c0ea9b43140081c06befc43351e77",
                 "shasum": ""
             },
             "require": {
@@ -3468,7 +3710,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-12-02T22:25:09+00:00"
+            "time": "2024-12-14T08:04:19+00:00"
         },
         {
             "name": "theseer/tokenizer",
