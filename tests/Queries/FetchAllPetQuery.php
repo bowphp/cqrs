@@ -6,7 +6,5 @@ use Bow\CQRS\Query\QueryInterface;
 
 class FetchAllPetQuery implements QueryInterface
 {
-    public function __construct()
-    {
-    }
+
 }
