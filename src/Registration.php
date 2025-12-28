@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Bow\CQRS;
 
+use Bow\CQRS\Attribute\CommandHandler as CommandHandlerAttribute;
+use Bow\CQRS\Attribute\QueryHandler as QueryHandlerAttribute;
 use Bow\CQRS\CQRSException;
 use Bow\CQRS\Query\QueryInterface;
 use Bow\CQRS\Command\CommandInterface;
 use Bow\CQRS\Query\QueryHandlerInterface;
 use Bow\CQRS\Command\CommandHandlerInterface;
+use ReflectionClass;
 
 final class Registration
 {
@@ -34,7 +37,7 @@ final class Registration
      */
     public static function queries(array $queries): void
     {
-        static::$queries = $queries;
+        static::$queries = [...static::$queries, ...$queries];
     }
 
     /**
@@ -45,7 +48,41 @@ final class Registration
      */
     public static function commands(array $commands): void
     {
-        static::$commands = $commands;
+        static::$commands = [...static::$commands, ...$commands];
+    }
+
+    /**
+     * Register handlers declared with attributes.
+     *
+     * @param array $handlers
+     * @return void
+     */
+    public static function handlers(array $handlers): void
+    {
+        foreach ($handlers as $handler) {
+            static::registerHandler($handler);
+        }
+    }
+
+    /**
+     * Register a handler declared with attributes.
+     *
+     * @param string $handler
+     * @return void
+     */
+    private static function registerHandler(string $handler): void
+    {
+        $reflection = new ReflectionClass($handler);
+
+        foreach ($reflection->getAttributes(CommandHandlerAttribute::class) as $attribute) {
+            $commandHandler = $attribute->newInstance();
+            static::$commands[$commandHandler->getCommandClass()] = $handler;
+        }
+
+        foreach ($reflection->getAttributes(QueryHandlerAttribute::class) as $attribute) {
+            $queryHandler = $attribute->newInstance();
+            static::$queries[$queryHandler->getQueryClass()] = $handler;
+        }
     }
 
     /**
@@ -55,26 +92,78 @@ final class Registration
      * @return QueryHandlerInterface|CommandHandlerInterface
      */
     public static function getHandler(
-        QueryInterface|CommandInterface $action
+        QueryInterface|CommandInterface $cq
     ): QueryHandlerInterface|CommandHandlerInterface {
-        $action_class = get_class($action);
-
-        if ($action instanceof QueryInterface) {
-            $handler = static::$queries[$action_class] ?? null;
-        } else {
-            $handler = static::$commands[$action_class] ?? null;
+        if ($cq instanceof CommandInterface) {
+            return static::getCommandHandler($cq);
         }
 
+        return static::getQueryHandler($cq);
+    }
+
+    /**
+     * Get the command handler for the given command instance.
+     *
+     * @param CommandInterface $command
+     * @return CommandHandlerInterface
+     */
+    public static function getCommandHandler(
+        CommandInterface $command
+    ): CommandHandlerInterface {
+        $command_class = get_class($command);
+
+        $handler = static::$commands[$command_class] ?? null;
+
         if (!is_null($handler)) {
-            return app($handler);
+            return static::makeHandler($handler);
         }
 
         throw new CQRSException(
             sprintf(
-                "The %s %s:class handler is not found on the CQ register",
-                $action instanceof QueryInterface ? 'query' : 'command',
-                $action_class
+                "The command %s:class handler is not found on the CQ register",
+                $command_class
             )
         );
+    }
+
+    /**
+     * Get the query handler for the given query instance.
+     *
+     * @param QueryInterface $query
+     * @return QueryHandlerInterface
+     */
+    public static function getQueryHandler(
+        QueryInterface $query
+    ): QueryHandlerInterface {
+        $query_class = get_class($query);
+
+        $handler = static::$queries[$query_class] ?? null;
+
+        if (!is_null($handler)) {
+            return static::makeHandler($handler);
+        }
+
+        throw new CQRSException(
+            sprintf(
+                "The query %s:class handler is not found on the CQ register",
+                $query_class
+            )
+        );
+    }
+
+    /**
+     * Resolve handler from container or instantiate directly.
+     *
+     * @param string $handler
+     * @return QueryHandlerInterface|CommandHandlerInterface
+     */
+    private static function makeHandler(
+        string $handler
+    ): QueryHandlerInterface|CommandHandlerInterface {
+        if (function_exists('app')) {
+            return app($handler);
+        }
+
+        return new $handler();
     }
 }

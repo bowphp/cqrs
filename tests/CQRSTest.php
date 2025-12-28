@@ -12,7 +12,11 @@ use Bow\Tests\CQRS\Commands\CreatePetCommand;
 use Bow\CQRS\Registration as CQRSRegistration;
 use Bow\Tests\CQRS\Queries\FetchPetQueryHandler;
 use Bow\Tests\CQRS\Commands\CreatePetCommandHandler;
+use Bow\Tests\CQRS\Commands\DummyCreateUserCommand;
+use Bow\Tests\CQRS\Commands\DummyCreateUserCommandHandler;
 use Bow\Tests\CQRS\Fixtures\PetFinder;
+use Bow\Tests\CQRS\Queries\InlineFetchAllQuery;
+use Bow\Tests\CQRS\Queries\InlineFetchAllQueryHandler;
 
 class CQRSTest extends TestCase
 {
@@ -20,12 +24,9 @@ class CQRSTest extends TestCase
     {
         PetFinder::clear();
 
-        CQRSRegistration::commands([
-            CreatePetCommand::class => CreatePetCommandHandler::class
-        ]);
-
-        CQRSRegistration::queries([
-            FetchPetQuery::class => FetchPetQueryHandler::class
+        CQRSRegistration::handlers([
+            CreatePetCommandHandler::class,
+            FetchPetQueryHandler::class
         ]);
     }
 
@@ -59,5 +60,30 @@ class CQRSTest extends TestCase
         $pet = $query_bus->execute(new FetchPetQuery(1));
 
         $this->assertEquals($pet->name, 'Pascal');
+    }
+
+    public function test_attribute_based_command_handler_registration_and_execution()
+    {
+        CQRSRegistration::handlers([
+            DummyCreateUserCommandHandler::class
+        ]);
+
+        $command_bus = new CommandBus();
+
+        $result = $command_bus->execute(new DummyCreateUserCommand('Alex'));
+
+        $this->assertSame('created Alex', $result);
+    }
+
+    public function test_manual_query_registration_merges_and_resolves()
+    {
+        CQRSRegistration::queries([
+            InlineFetchAllQuery::class => InlineFetchAllQueryHandler::class
+        ]);
+
+        $handler = CQRSRegistration::getQueryHandler(new InlineFetchAllQuery());
+
+        $this->assertInstanceOf(InlineFetchAllQueryHandler::class, $handler);
+        $this->assertSame('ok', $handler->process(new InlineFetchAllQuery()));
     }
 }

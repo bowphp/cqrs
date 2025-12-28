@@ -14,7 +14,7 @@ class QueryBus
      */
     public function execute(QueryInterface $query): mixed
     {
-        $handler = Registration::getHandler($query);
+        $handler = Registration::getQueryHandler($query);
 
         return $handler->process($query);
     }

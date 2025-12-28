@@ -66,6 +66,43 @@ public function run()
 }
 ```
 
+### Attribute-based registration
+
+You can also map handlers to their commands/queries with PHP attributes instead of manual arrays:
+
+```php
+use Bow\CQRS\Attribute\CommandHandler;
+use Bow\CQRS\Attribute\QueryHandler;
+use Bow\CQRS\Command\CommandHandlerInterface;
+use Bow\CQRS\Command\CommandInterface;
+use Bow\CQRS\Query\QueryHandlerInterface;
+use Bow\CQRS\Query\QueryInterface;
+
+#[CommandHandler(CreateUserCommand::class)]
+class CreateUserCommandHandler implements CommandHandlerInterface
+{
+    public function process(CommandInterface $command): mixed
+    {
+        // create the user...
+    }
+}
+
+#[QueryHandler(FetchUserQuery::class)]
+class FetchUserQueryHandler implements QueryHandlerInterface
+{
+    public function retrieve(QueryInterface $query): mixed
+    {
+        // fetch and return the user...
+    }
+}
+
+// Register handlers once (attributes map them to the right message)
+CQRSRegistration::handlers([
+    CreateUserCommandHandler::class,
+    FetchUserQueryHandler::class,
+]);
+```
+
 Execute the command in the controller:
 
 ```php
