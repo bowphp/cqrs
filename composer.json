@@ -24,6 +24,11 @@
         "phpunit/phpunit": "^10.1@dev",
         "squizlabs/php_codesniffer": "*"
     },
+    "config": {
+        "platform": {
+            "php": "8.1.0"
+        }
+    },
     "scripts": {
         "phpcbf": "phpcbf --standard=psr12 --severity=4 --tab-width=4 src tests",
         "phpcs": "phpcs --standard=psr12 --severity=4 --tab-width=4 src",
