@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a31ca7830b1895f89cbe98098a958b23",
+    "content-hash": "fee85e45a09e709bf4956a6cfad1cc94",
     "packages": [
         {
             "name": "bowphp/framework",
