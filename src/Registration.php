@@ -74,15 +74,40 @@ final class Registration
     {
         $reflection = new ReflectionClass($handler);
 
-        foreach ($reflection->getAttributes(CommandHandlerAttribute::class) as $attribute) {
+        $commandAttributes = $reflection->getAttributes(CommandHandlerAttribute::class);
+        $queryAttributes = $reflection->getAttributes(QueryHandlerAttribute::class);
+
+        if (count($commandAttributes) === 0 && count($queryAttributes) === 0) {
+            throw new CQRSException(
+                sprintf(
+                    "The handler %s has no #[CommandHandler] or #[QueryHandler] attribute",
+                    $handler
+                )
+            );
+        }
+
+        foreach ($commandAttributes as $attribute) {
             $commandHandler = $attribute->newInstance();
             static::$commands[$commandHandler->getCommandClass()] = $handler;
         }
 
-        foreach ($reflection->getAttributes(QueryHandlerAttribute::class) as $attribute) {
+        foreach ($queryAttributes as $attribute) {
             $queryHandler = $attribute->newInstance();
             static::$queries[$queryHandler->getQueryClass()] = $handler;
         }
+    }
+
+    /**
+     * Reset the registered commands and queries.
+     *
+     * Mostly useful in tests to isolate state between cases.
+     *
+     * @return void
+     */
+    public static function reset(): void
+    {
+        static::$commands = [];
+        static::$queries = [];
     }
 
     /**
@@ -120,7 +145,7 @@ final class Registration
 
         throw new CQRSException(
             sprintf(
-                "The command %s:class handler is not found on the CQ register",
+                "The command %s handler is not found on the CQ register",
                 $command_class
             )
         );
@@ -145,7 +170,7 @@ final class Registration
 
         throw new CQRSException(
             sprintf(
-                "The query %s:class handler is not found on the CQ register",
+                "The query %s handler is not found on the CQ register",
                 $query_class
             )
         );

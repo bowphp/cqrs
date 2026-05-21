@@ -90,7 +90,7 @@ class CreateUserCommandHandler implements CommandHandlerInterface
 #[QueryHandler(FetchUserQuery::class)]
 class FetchUserQueryHandler implements QueryHandlerInterface
 {
-    public function retrieve(QueryInterface $query): mixed
+    public function process(QueryInterface $query): mixed
     {
         // fetch and return the user...
     }

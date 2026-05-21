@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bow\CQRS\Command;
 
 use Bow\CQRS\Command\CommandInterface;
