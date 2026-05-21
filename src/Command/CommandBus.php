@@ -15,7 +15,7 @@ class CommandBus
      */
     public function execute(CommandInterface $command): mixed
     {
-        $handler = Registration::getHandler($command);
+        $handler = Registration::getCommandHandler($command);
 
         return $handler->process($command);
     }
