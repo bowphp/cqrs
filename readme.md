@@ -103,6 +103,41 @@ CQRSRegistration::handlers([
 ]);
 ```
 
+A handler passed to `handlers()` must carry at least one `#[CommandHandler]` or `#[QueryHandler]` attribute. If none is found, `CQRSException` is thrown at registration time — catching typos and missing attributes early instead of at dispatch.
+
+### Transactional command handlers
+
+For handlers that should run inside a database transaction, extend `CommandHandlerTransactionService` and implement `run()` instead of `process()`. The base class wraps the call in `Database::startTransaction()` / `commit()` / `rollback()`:
+
+```php
+use Bow\CQRS\Command\CommandHandlerTransactionService;
+use Bow\CQRS\Command\CommandInterface;
+
+class CreateUserCommandHandler extends CommandHandlerTransactionService
+{
+    protected function run(CommandInterface $command): mixed
+    {
+        // any throw here triggers a rollback
+        return User::create([
+            "username" => $command->username,
+            "email" => $command->email,
+        ]);
+    }
+}
+```
+
+### Resetting the registry (testing)
+
+`Registration` keeps registered commands and queries in static state. To isolate test cases, call `CQRSRegistration::reset()` between runs:
+
+```php
+protected function setUp(): void
+{
+    CQRSRegistration::reset();
+    CQRSRegistration::handlers([CreateUserCommandHandler::class]);
+}
+```
+
 Execute the command in the controller:
 
 ```php
